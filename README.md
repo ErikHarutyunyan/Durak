@@ -27,7 +27,6 @@ This project aims to provide a digital version of the Durak card game where play
 - Interactive user interface for a seamless gaming experience.
 - Card dragging and dropping for easy gameplay.
 - Real-time updates using MobX for a dynamic game state.
-- Support for multiple rounds and tracking of game progress.
 - Win and lose conditions with a user-friendly interface.
 
 ## Installation
