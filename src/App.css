@@ -1,0 +1,402 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100%;
+  background-image: url("../public/assets/bgDurak.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+.playerCards {
+  display: flex;
+  justify-content: center;
+}
+
+.battleField {
+  display: flex;
+}
+
+.red {
+  color: red;
+  font-size: 100px;
+}
+
+.black {
+  color: black;
+  font-size: 100px;
+}
+
+.deckInfo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  column-gap: 10px;
+}
+
+.playerCards.my .card {
+  cursor: pointer;
+}
+
+.playerCards.my .card:hover {
+  opacity: 0.7;
+  position: relative;
+  bottom: 15px;
+  transition: all 0.4s;
+}
+
+.btn-actions {
+  outline: none;
+  width: 80px;
+  height: 50px;
+  border-radius: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #1f9900;
+  cursor: pointer;
+  margin-top: 35px;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.btn-actions:hover {
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+
+.red-btn {
+  border: 2px solid #ed141e;
+}
+
+.game-over {
+  width: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  z-index: 5;
+  row-gap: 75px;
+}
+
+.game-over b {
+  font-size: 25px;
+}
+
+.game-over-btn {
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  margin-top: 30px;
+  position: relative;
+  padding: 16px 30px;
+  font-size: 1.5rem;
+  color: var(--color);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  text-shadow: 0 0 15px var(--color);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: 0.5s;
+  z-index: 5;
+}
+
+.game-over-btn:hover {
+  color: #fff;
+  border: 2px solid rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 var(--color);
+}
+
+.game-over-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color);
+  z-index: -1;
+  transform: scale(0);
+  transition: 0.5s;
+}
+
+.game-over-btn:hover::before {
+  transform: scale(1);
+  transition-delay: 0.5s;
+  box-shadow:
+    0 0 10px var(--color),
+    0 0 30px var(--color),
+    0 0 60px var(--color);
+}
+
+.game-over-btn span {
+  position: absolute;
+  background: var(--color);
+  pointer-events: none;
+  border-radius: 2px;
+  box-shadow:
+    0 0 10px var(--color),
+    0 0 20px var(--color),
+    0 0 30px var(--color),
+    0 0 50px var(--color),
+    0 0 100px var(--color);
+  transition: 0.5s ease-in-out;
+  transition-delay: 0.25s;
+}
+
+.game-over-btn:hover span {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+.game-over-btn span:nth-child(1),
+.game-over-btn span:nth-child(3) {
+  width: 40px;
+  height: 4px;
+}
+
+.game-over-btn:hover span:nth-child(1),
+.game-over-btn:hover span:nth-child(3) {
+  transform: translateX(0);
+}
+
+.game-over-btn span:nth-child(2),
+.game-over-btn span:nth-child(4) {
+  width: 4px;
+  height: 40px;
+}
+
+.game-over-btn:hover span:nth-child(1),
+.game-over-btn:hover span:nth-child(3) {
+  transform: translateY(0);
+}
+
+.game-over-btn span:nth-child(1) {
+  top: calc(50% - 2px);
+  left: -50px;
+  transform-origin: left;
+}
+
+.game-over-btn:hover span:nth-child(1) {
+  left: 50%;
+}
+
+.game-over-btn span:nth-child(3) {
+  top: calc(50% - 2px);
+  right: -50px;
+  transform-origin: right;
+}
+
+.game-over-btn:hover span:nth-child(3) {
+  right: 50%;
+}
+
+.game-over-btn span:nth-child(2) {
+  left: calc(50% - 2px);
+  top: -50px;
+  transform-origin: top;
+}
+
+.game-over-btn:hover span:nth-child(2) {
+  top: 50%;
+}
+
+.game-over-btn span:nth-child(4) {
+  left: calc(50% - 2px);
+  bottom: -50px;
+  transform-origin: bottom;
+}
+
+.game-over-btn:hover span:nth-child(4) {
+  bottom: 50%;
+}
+
+.lose {
+  color: crimson;
+}
+
+.win {
+  color: greenyellow;
+}
+
+.game-over-btn:hover {
+  opacity: 0.7;
+}
+
+span.swiper-pagination-progressbar-fill {
+  background: #d89d54 !important;
+}
+
+.swiper-slide {
+  width: 80px !important;
+  max-width: 80px !important;
+  min-width: 80px !important;
+}
+
+.playerCards {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.swiper-wrapper {
+  padding: 20px 0px;
+}
+
+.swiper-pagination.swiper-pagination-progressbar.swiper-pagination-horizontal {
+  bottom: 0;
+  top: auto;
+}
+
+.swiper {
+  z-index: 0 !important;
+}
+
+.battleFieldWrapper {
+  padding: 10px;
+  min-height: 190px;
+}
+
+.gameWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gameWrapper:before {
+  position: absolute;
+  content: "";
+  background-image: url(../public/assets/asd.png);
+  background-repeat: no-repeat;
+  background-size: 85%;
+  background-position: top;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 120px;
+  transform: scale(-1) rotate(-5deg);
+  animation: action1 1s infinite alternate;
+}
+
+.gameWrapper:after {
+  position: absolute;
+  content: "";
+  background-image: url(../public/assets/asd.png);
+  background-repeat: no-repeat;
+  background-size: 85%;
+  background-position: bottom;
+  bottom: -30px;
+  right: -60px;
+  width: 200px;
+  height: 120px;
+  transform: rotate(-15deg);
+  animation: action2 1s infinite alternate;
+}
+
+@keyframes action1 {
+  0% {
+    transform: scale(-1) rotate(-5deg) translateY(0);
+  }
+  100% {
+    transform: scale(-1) rotate(-5deg) translateY(-5px);
+  }
+}
+
+@keyframes action2 {
+  0% {
+    transform: rotate(-15deg) translateY(0);
+  }
+  100% {
+    transform: rotate(-15deg) translateY(-5px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .gameWrapper {
+    zoom: 1.2;
+  }
+}
+
+@media (max-width: 1380px) {
+  .gameWrapper {
+    zoom: 0.8;
+  }
+}
+
+@media (max-width: 500px) {
+  .gameWrapper {
+    zoom: 0.8;
+  }
+}
+
+@media (max-width: 400px) {
+  .gameWrapper {
+    zoom: 0.7;
+  }
+}
+
+button.mute {
+  font-size: 16px;
+  color: #eee;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  background: rgb(179 26 26 / 80%);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+  border-radius: 16px;
+}
+
+button.mute.fade:hover {
+  opacity: 0.8;
+}
+
+.fade {
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
+}
+
+/*
+Կառ, Գոգը քանի տարով ա փոքր քեզանից
+
+
+Դուք երեքտ իրարից լռիվ տարբերեք
+
+
+
+*/
